@@ -50,7 +50,6 @@ module.exports = {
     TanStackRouterWebpack({ target: 'react', autoCodeSplitting: true, routesDirectory: "./src/routes" }),
     new ModuleFederationPlugin({
       name: "host",
-      // library: { type: "module" },
       filename: "remoteEntry.js",
       remotes: {
         remote: "remote@https://localhost:3001/remoteEntry.js",

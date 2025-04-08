@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Button, ShowButtonClick } from "remote/components";
 import { lazy, Suspense } from "react";
 
-const Button = lazy(() => import("remote/Button"));
+// const Button = lazy(() => import("remote/Button"));
 
 export const Route = createFileRoute("/remote/")({
   component: RouteComponent,
@@ -14,7 +15,7 @@ function RouteComponent() {
       <Suspense fallback="Loading...">
         <Button />
       </Suspense>
-      {/* <ShowButtonClick /> */}
+      <ShowButtonClick />
     </div>
   );
 }

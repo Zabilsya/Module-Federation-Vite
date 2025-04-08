@@ -17,7 +17,8 @@
     "strictNullChecks": true,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "noImplicitAny": true,
+    "declaration": true,
+    "declarationMap": true,
     "paths": {
       "@*": ["./src/*"],
       "@app/*": ["./src/app/*"],
@@ -27,13 +28,8 @@
       "@entities/*": ["./src/entities/*"],
       "@shared/*": ["./src/shared/*"]
     },
-    "plugins": [
-      {
-        "name": "typescript-styled-plugin",
-        "validate": false
-      }
-    ],
     "pretty": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

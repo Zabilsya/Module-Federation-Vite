@@ -50,7 +50,21 @@ module.exports = {
           name: "remote",
           filename: 'remoteEntry.js',
           exposes: {
-            './Button': './src/components/Button',
+            './components': './src/components',
+          },
+          dts: {
+            generateTypes: {
+              extractRemoteTypes: true,
+              extractThirdParty: true,
+              deleteTypesFolder: true,
+              generateAPITypes: true,
+              compileInChildProcess: true,
+            },
+            consumeTypes: {
+              consumeAPITypes: true,
+              deleteTypesFolder: true,
+              maxRetries: 3,
+            },
           },
           shared: {
             ...deps,
