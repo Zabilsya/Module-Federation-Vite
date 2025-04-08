@@ -49,7 +49,7 @@ module.exports = {
     new ModuleFederationPlugin({
           name: "remote",
           filename: 'remoteEntry.js',
-          expose: {
+          exposes: {
             './Button': './src/components/Button',
           },
           shared: {
