@@ -2,6 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const { TanStackRouterWebpack } = require('@tanstack/router-plugin/webpack')
+const { ModuleFederationPlugin } = require('@module-federation/enhanced/webpack')
+
+const deps = require("../package.json").dependencies;
 
 const mode = process.env.NODE_ENV || 'production';
 const isProdMode = mode === 'production';
@@ -45,5 +48,26 @@ module.exports = {
       systemvars: true,
     }),
     TanStackRouterWebpack({ target: 'react', autoCodeSplitting: true, routesDirectory: "./src/routes" }),
+    new ModuleFederationPlugin({
+      name: "host",
+      // library: { type: "module" },
+      filename: "remoteEntry.js",
+      remotes: {
+        remote: "remote@https://localhost:3001/remoteEntry.js",
+      },
+      shared: {
+        ...deps,
+        react: {
+          singleton: true,
+          requiredVersion: deps.react,
+          eager:true
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: deps["react-dom"],
+          eager:true
+        },
+      },
+    }),
   ],
 };

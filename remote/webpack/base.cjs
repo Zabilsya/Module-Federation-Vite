@@ -1,8 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const { ModuleFederationPlugin } = require('@module-federation/enhanced/webpack')
 
-const isNeedBundleAnalyzer = process.env.BUNDLE_ANALYZER || false;
+const deps = require("../package.json").dependencies;
 
 const mode = process.env.NODE_ENV || 'production';
 const isProdMode = mode === 'production';
@@ -45,5 +46,25 @@ module.exports = {
     new Dotenv({
       systemvars: true,
     }),
+    new ModuleFederationPlugin({
+          name: "remote",
+          filename: 'remoteEntry.js',
+          expose: {
+            './Button': './src/components/Button',
+          },
+          shared: {
+            ...deps,
+            react: {
+              singleton: true,
+              requiredVersion: deps.react,
+              eager:true
+            },
+            "react-dom": {
+              singleton: true,
+              requiredVersion: deps["react-dom"],
+              eager:true
+            },
+          },
+        }),
   ],
 };

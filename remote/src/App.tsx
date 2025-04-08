@@ -1,4 +1,5 @@
-import { Button, ShowButtonClick } from "./components";
+import Button from "./components/Button";
+import { ShowButtonClick } from "./components";
 
 function App() {
   return  (
