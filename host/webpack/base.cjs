@@ -11,7 +11,7 @@ const isProdMode = mode === 'production';
 const devServerUrl = `https://localhost:3000/`;
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: './src/index.ts',
   devtool: 'source-map',
   mode,
   target: 'web',
